@@ -10,36 +10,6 @@
 ; works only on windows (AHK not for MacOS)
 
 
-; Hotkey: Ctrl+Alt+M
-^!m:: {
-    ; Get the position and size of the active window
-    WinGetPos(&X, &Y, &W, &H, "A")
-
-    ; Get the number of monitors
-    monitorCount := SysGet(80)
-
-    MsgBox(monitorCount "ss" X "ss" Y )
-    /*
-
-    ; Loop through each monitor and check if the window is on it
-    Loop monitorCount {
-        ; Use the loop index directly
-        monitorLeft := SysGet(76, monitorIndex)
-        monitorTop := SysGet(77, monitorIndex)
-        monitorWidth := SysGet(78, monitorIndex)
-        monitorHeight := SysGet(79, monitorIndex)
-
-        ; Check if the active window's top-left corner is within this monitor's bounds
-        if (X >= monitorLeft && X < monitorLeft + monitorWidth && Y >= monitorTop && Y < monitorTop + monitorHeight) {
-            MsgBox "The active window is on monitor #" monitorIndex "."
-            return
-        }
-    }
-    MsgBox "The active window could not be found on any monitor."
-    */
-}
-
-
 ; abbreviations
 
 :*:bnd::benauwdheid             ; typing bnd prints benauwdheid
@@ -122,25 +92,9 @@ Remaps:
 - 'Alt + Down': Remapped to 'Win + S' for navigating to the next section.
 - 'Alt + Up': Remapped to 'Win + W' for navigating to the previous section.
 
-Note:
-- This message box is scrollable for long content.
-- Press 'OK' to close the message box.
 )"
 
 F1::ShowCustomBox("message", title, message, "", 800, 600)
-
-F3:: {
-    title := "Input Required"
-    prompt := "Please enter your name:"
-    userInput := ShowCustomBox("input", title, prompt, "Default Name", 400, 200)
-    
-    if userInput != ""
-        ShowCustomBox("message", "Input Received", "You entered: " userInput, "", 400, 200)
-    else
-        ShowCustomBox("message", "Input Canceled", "You canceled the input.", "", 400, 200)
-}
-
-
 
 ; remaps
 
