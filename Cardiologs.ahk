@@ -10,6 +10,36 @@
 ; works only on windows (AHK not for MacOS)
 
 
+; Hotkey: Ctrl+Alt+M
+^!m:: {
+    ; Get the position and size of the active window
+    WinGetPos(&X, &Y, &W, &H, "A")
+
+    ; Get the number of monitors
+    monitorCount := SysGet(80)
+
+    MsgBox(monitorCount "ss" X "ss" Y )
+    /*
+
+    ; Loop through each monitor and check if the window is on it
+    Loop monitorCount {
+        ; Use the loop index directly
+        monitorLeft := SysGet(76, monitorIndex)
+        monitorTop := SysGet(77, monitorIndex)
+        monitorWidth := SysGet(78, monitorIndex)
+        monitorHeight := SysGet(79, monitorIndex)
+
+        ; Check if the active window's top-left corner is within this monitor's bounds
+        if (X >= monitorLeft && X < monitorLeft + monitorWidth && Y >= monitorTop && Y < monitorTop + monitorHeight) {
+            MsgBox "The active window is on monitor #" monitorIndex "."
+            return
+        }
+    }
+    MsgBox "The active window could not be found on any monitor."
+    */
+}
+
+
 ; abbreviations
 
 :*:bnd::benauwdheid             ; typing bnd prints benauwdheid
@@ -38,41 +68,79 @@
 
 ; F1 prints the whole list of combinations
 
-help := "
-( 
+title := "Cheat Sheet - Cardiologs Script"
+message := "
+(
 This is the list of automations using this AHK Cardiologs script.
 This script contains abbreviations, remaps, and automates processes within Cardiologs.
 
 Regarding the abbreviations:
-Borstklachten: dok prints druk op de borst, pob prints pijn op de borst, bnd prints benauwdheid, and bkl prints borstklacht.
-Andere klachten: lch prints lichthoofdigheid, krt prints kortademigheid, hkl prints hartklopping, ovs prints overslag, and typing dzl prints duizeligheid.
-Ritmes: afib prints boezemfibrilleren, snt prints sinustachycardie, snb prints sinusbradycardie, sna prints sinusaritmie, and snr prints sinusritme.
-Bi- and trigeminie: uvb prints uniforme ventriculaire bigeminie, uvt prints uniforme ventriculaire trigeminie, mvb prints multiforme ventriculaire bigeminie, and mvt prints multiforme ventriculaire trigeminie.
-Overig: isan prints is aangetroffen and hh prints huishoudelijke werkzaamheden
+- Borstklachten:
+  - dok: prints druk op de borst
+  - pob: prints pijn op de borst
+  - bnd: prints benauwdheid
+  - bkl: prints borstklacht
+- Andere klachten:
+  - lch: prints lichthoofdigheid
+  - krt: prints kortademigheid
+  - hkl: prints hartkloppingen
+  - ovs: prints overslag
+  - dzl: prints duizeligheid
+- Ritmes:
+  - afib: prints boezemfibrilleren
+  - snt: prints sinustachycardie
+  - snb: prints sinusbradycardie
+  - sna: prints sinusaritmie
+  - snr: prints sinusritme
+- Bi- and trigeminie:
+  - uvb: prints uniforme ventriculaire bigeminie
+  - uvt: prints uniforme ventriculaire trigeminie
+  - mvb: prints multiforme ventriculaire bigeminie
+  - mvt: prints multiforme ventriculaire trigeminie
+- Overig:
+  - isan: prints is aangetroffen
+  - hh: prints huishoudelijke werkzaamheden
 
-Regarding the automation:
-F2 comments PR time or P:QRS ratio based on type of the AV-block.
-F4 prints PT noteert.'
-Alt + a automatically comments 'Aberrantie' and adds it to the report.
-Alt + n prints the right (ns)VT.
-Ctrl + q adds langste (& snelste) PAT/SVT to the report when it has a beginning and end.
-Win + 0 (also Win + Numpad0) calculates the QTc (using Bazett's formula) and prints all the durations.
-Win + 1 (also Win + Numpad1) prints text when handmatige strook is added for atrial rhythm.
-Win + 2 (also Win + Numpad2) prints text when handmatige strook is added for ventricular rhythm.
-Win + 4 (also Win + Numpad4) prints the text for the report when only one complaint is present.
-Win + 5 (also Win + Numpad5) prints the text for the report when no complaint is present.
-Win + 6 (also Win + Numpad6) prints the text for the report when no diary is present.
+Automations:
+- F2: Comments PR time or P:QRS ratio based on type of the AV-block.
+- F4: Prints PT noteert.
+- Alt + A: Automatically comments 'Aberrantie' and adds it to the report.
+- Alt + N: Prints the right (ns)VT.
+- Ctrl + Q: Adds langste (& snelste) PAT/SVT to the report when it has a beginning and end.
+- Win + 0 (also Numpad0): Calculates the QTc (using Bazett's formula) and prints all durations.
+- Win + 1 (also Numpad1): Prints text when handmatige strook is added for atrial rhythm.
+- Win + 2 (also Numpad2): Prints text when handmatige strook is added for ventricular rhythm.
+- Win + 4 (also Numpad4): Prints the text for the report when only one complaint is present.
+- Win + 5 (also Numpad5): Prints the text for the report when no complaint is present.
+- Win + 6 (also Numpad6): Prints the text for the report when no diary is present.
 
-Regarding the remaps:
-'m' (to allow merging of multiple strips) is remapped to the left '\' (left to 'z' on my keyboard).
-'Delete' is remapped to '`' key (top left key on many keyboards).
-'Home' to quickly move to the beginning of all strips within a section is remapped to 'Win + a'.
-'End' to quickly move to the end of all strips within a section is remapped to 'Win + d'.
-'Alt + Down' to go the next section is remapped to 'Win + s'.
-'Alt + Up' to go to the previous section is remapped to 'Win + w'. 
+Remaps:
+- 'm': Allows merging of multiple strips, remapped to the left '\' (left to 'z' on my keyboard).
+- 'Delete': Remapped to '`' key (top left key on many keyboards).
+- 'Home': Remapped to 'Win + A' for moving to the beginning of all strips within a section.
+- 'End': Remapped to 'Win + D' for moving to the end of all strips within a section.
+- 'Alt + Down': Remapped to 'Win + S' for navigating to the next section.
+- 'Alt + Up': Remapped to 'Win + W' for navigating to the previous section.
+
+Note:
+- This message box is scrollable for long content.
+- Press 'OK' to close the message box.
 )"
 
-F1::MsgBox(help)
+F1::ShowCustomBox("message", title, message, "", 800, 600)
+
+F3:: {
+    title := "Input Required"
+    prompt := "Please enter your name:"
+    userInput := ShowCustomBox("input", title, prompt, "Default Name", 400, 200)
+    
+    if userInput != ""
+        ShowCustomBox("message", "Input Received", "You entered: " userInput, "", 400, 200)
+    else
+        ShowCustomBox("message", "Input Canceled", "You canceled the input.", "", 400, 200)
+}
+
+
 
 ; remaps
 
@@ -93,52 +161,41 @@ sc056:: Send "m"
 
 F2::        ; F2 comments the PR times for AV-blocks
 {
-    type := InputBox("1 for Wenckebach, 2 Mobitz II, 3 for high-degree block").value
+    type := ShowCustomBox("input", "Block Type", "1 for Wenckebach, 2 for Mobitz II, 3 for high-degree block", "", 400, 200)
 
-    if (type==1) {
-        PR_before := InputBox("Enter PR time before non-conducted beat").value
-        PR_after := InputBox("Enter PR time after non-conducted beat").value
-        
+    if (type == "1") {
+        PR_before := ShowCustomBox("input", "PR Time Before", "Enter PR time before non-conducted beat:", "", 400, 200)
+        PR_after := ShowCustomBox("input", "PR Time After", "Enter PR time after non-conducted beat:", "", 400, 200)
+
         if (PR_after > PR_before) {
-            MsgBox("Error. PR after is longer than the PR before")
-        }
-        else {
+            ShowCustomBox("message", "Error", "PR after is longer than the PR before", "", 400, 200)
+        } else {
             WinActivate("Philips Cardiologs - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
 
             Send "c"
             Sleep 400
             Send "Wenckebach. PQ voor " PR_before "ms. PQ na " PR_after "ms.{Enter}"
         }
-    }
+    } else if (type == "2") {
+        PR := ShowCustomBox("input", "PR Time", "Enter PR time:", "", 400, 200)
 
-    else if (type==2) {
-        PR := InputBox("Enter PR time").value
-        
         WinActivate("Philips Cardiologs - Google Chrome") or WinActive("Cardiologs - Persoonlijk - Microsoft Edge")
 
         Send "c"
         Sleep 400
         Send "Mobitz II. PQ voor & na " PR "ms.{Enter}"
-    }
+    } else if (type == "3") {
+        ratio := ShowCustomBox("input", "P:QRS Ratio", "Enter the P:QRS ratio:", "", 400, 200)
 
-    else if (type==3) {
-
-        ratio := InputBox("Enter the P:QRS ratio").value
-        
         WinActivate("Philips Cardiologs - Google Chrome") or WinActive("Cardiologs - Persoonlijk - Microsoft Edge")
 
         Send "c"
         Sleep 400
-        Send ratio " AV-blok{Enter} "
-    }
-
-    else {
-        MsgBox "Try Again!"
+        Send ratio " AV-blok{Enter}"
+    } else {
+        ShowCustomBox("message", "Error", "Try Again!", "", 400, 200)
     }
 }
-
-
-
 
 F4:: Send "PT noteert '{Space}"
 
@@ -151,16 +208,15 @@ F4:: Send "PT noteert '{Space}"
     Sleep 200
 } 
 
-
-^q::            ; (CRTL + q) prints langste (en snelste) PAT/SVT when it consists of a beginning and end. 
+^q::        ; (CTRL + Q) prints langste (en snelste) PAT/SVT when it consists of a beginning and end
 {
-    mode := InputBox("1 for langste PAT, 2 for langste en snelste PAT, 3 for langste SVT, 4 for langste en snelste SVT, 5 for PAT, and 6 for SVT", "begin/eind", "w300 h150").value
-    
+    mode := ShowCustomBox("input", "Select Mode", "1 for langste PAT, 2 for langste & snelste PAT, 3 for langste SVT, etc.", "", 400, 200)
+
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
-    if (mode == 1) {
-        Send "c" 
+    if (mode == "1") {
+        Send "c"
         Sleep 500
-        Send "Begin langste PAT" 
+        Send "Begin langste PAT"
         Sleep 300
         Send "{Enter}"
         Sleep 800
@@ -171,12 +227,10 @@ F4:: Send "PT noteert '{Space}"
         Send "Eind langste PAT"
         Sleep 500
         Send "{Enter}"
-    } 
-    
-    else if (mode == 2) {
+    } else if (mode == "2") {
         Send "c"
         Sleep 500
-        Send "Begin langste & snelste PAT" 
+        Send "Begin langste & snelste PAT"
         Sleep 300
         Send "{Enter}"
         Sleep 800
@@ -187,12 +241,10 @@ F4:: Send "PT noteert '{Space}"
         Send "Eind langste & snelste PAT"
         Sleep 500
         Send "{Enter}"
-    } 
-
-    else if (mode == 3) {
+    } else if (mode == "3") {
         Send "c"
         Sleep 800
-        Send "Begin langste SVT" 
+        Send "Begin langste SVT"
         Sleep 300
         Send "{Enter}"
         Sleep 800
@@ -203,12 +255,10 @@ F4:: Send "PT noteert '{Space}"
         Send "Eind langste SVT"
         Sleep 500
         Send "{Enter}"
-    }
-
-    else if (mode == 4) {
+    } else if (mode == "4") {
         Send "c"
         Sleep 500
-        Send "Begin langste & snelste SVT" 
+        Send "Begin langste & snelste SVT"
         Sleep 300
         Send "{Enter}"
         Sleep 800
@@ -219,53 +269,19 @@ F4:: Send "PT noteert '{Space}"
         Send "Eind langste & snelste SVT"
         Sleep 500
         Send "{Enter}"
-    } 
-
-    if (mode == 5) {
-        Send "c" 
-        Sleep 500
-        Send "Begin PAT" 
-        Sleep 300
-        Send "{Enter}"
-        Sleep 800
-        Send "{Right}"
-        Sleep 500
-        Send "c"
-        Sleep 500
-        Send "Eind PAT"
-        Sleep 500
-        Send "{Enter}"
-    } 
-
-    else if (mode == 6) {
-        Send "c"
-        Sleep 800
-        Send "Begin SVT" 
-        Sleep 300
-        Send "{Enter}"
-        Sleep 800
-        Send "{Right}"
-        Sleep 500
-        Send "c"
-        Sleep 500
-        Send "Eind SVT"
-        Sleep 500
-        Send "{Enter}"
-    }
-    else {
-        MsgBox "Try Again!"
+    } else {
+        ShowCustomBox("message", "Error", "Try Again!", "", 400, 200)
     }
 } 
 
 
-!n::            ; (alt + n) prints the right (ns)VT 
+!n::            ; (alt + n) prints the right (ns)VT
 {
-    what:= InputBox("1 for langste, 2 for snelste, 3 for langste & snelste", "Langste of snelste ", "w300 h150").value
-    form:= InputBox("1 for monomorf, 2 for polymorf", "Morphologie", "w300 h150").Value
+    what := ShowCustomBox("input", "Langste of Snelste", "1 for langste, 2 for snelste, 3 for langste & snelste:", "", 400, 200)
+    form := ShowCustomBox("input", "Morphologie", "1 for monomorf, 2 for polymorf:", "", 400, 200)
 
-        
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
-    if (what == 1 and form == 1 ) {
+    if (what == "1" and form == "1") {
         Send "c" 
         Sleep 500
         Send "Langste monomorfe nsVT"
@@ -273,7 +289,7 @@ F4:: Send "PT noteert '{Space}"
         Send "{Enter}"    
     } 
     
-    else if (what == 2 and form == 1 ) {
+    else if (what == "2" and form == "1") {
         Send "c" 
         Sleep 500
         Send "Snelste monomorfe nsVT"
@@ -281,14 +297,14 @@ F4:: Send "PT noteert '{Space}"
         Send "{Enter}"    
     } 
 
-    else if (what == 3 and form == 1 ) {
+    else if (what == "3" and form == "1") {
         Send "c" 
         Sleep 500
         Send "Langste & snelste monomorfe nsVT"
         Sleep 500
         Send "{Enter}"    
     } 
-    if (what == 1 and form == 2 ) {
+    else if (what == "1" and form == "2") {
         Send "c" 
         Sleep 500
         Send "Langste polymorfe nsVT"
@@ -296,7 +312,7 @@ F4:: Send "PT noteert '{Space}"
         Send "{Enter}"    
     } 
     
-    else if (what == 2 and form == 2 ) {
+    else if (what == "2" and form == "2") {
         Send "c" 
         Sleep 500
         Send "Snelste polymorfe nsVT"
@@ -304,34 +320,35 @@ F4:: Send "PT noteert '{Space}"
         Send "{Enter}"    
     } 
 
-    else if (what == 3 and form == 2 ) {
+    else if (what == "3" and form == "2") {
         Send "c" 
         Sleep 500
         Send "Langste & snelste polymorfe nsVT"
         Sleep 500
         Send "{Enter}"    
     } 
-} 
+}
 
-#0::            ; (Windows key + 0) automatically calculates QTc based on HR or RR-interval and prints it
+#0::        ; (Windows Key + 0) calculates QTc and prints it
 {
-    PR := InputBox("Please enter the PR time (in milliseconds)","QT Time Input","w300 h150").value
-    QRS := InputBox("Please enter the QRS time (in milliseconds)","QT Time Input","w300 h150").value
-    QT := InputBox("Please enter the QT time (in milliseconds)","QT Time Input","w300 h150").value
-    HR := InputBox("Please enter the heart rate (in beats per minute) or RR-interval (in ms)","Heart Rate Input", "w300 h150").value
+    PR := ShowCustomBox("input", "PR Time", "Please enter the PR time (ms):", "", 400, 200)
+    QRS := ShowCustomBox("input", "QRS Time", "Please enter the QRS time (ms):", "", 400, 200)
+    QT := ShowCustomBox("input", "QT Time", "Please enter the QT time (ms):", "", 400, 200)
+    HR := ShowCustomBox("input", "Heart Rate", "Please enter the heart rate (bpm) or RR interval (ms):", "", 400, 200)
+
+    if (PR == "" || QRS == "" || QT == "" || HR == "") {
+        ShowCustomBox("message", "Error", "All inputs are required!", 400, 200)
+        return
+    }
 
     if (HR < 200) {
         RR := 60 / HR
         QTc := Round(QT / Sqrt(RR))
-        }
+    } else {
+        QTc := Round(QT / Sqrt((HR / 1000)))
+    }
 
-    else {  
-        QTc := Round(QT / Sqrt((HR/1000)))    
-        }
-
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
-    Sleep 300
-    Send "c" 
+    Send "c"
     Sleep 300
     Send "PQ: " PR " ms, QRS: " QRS " ms, QTc: " QTc "ms{Enter}"
     Sleep 600
@@ -339,34 +356,33 @@ F4:: Send "PT noteert '{Space}"
 
 #Numpad0::      ; (Windows key + Numpad 0) automatically calculates QTc based on HR or RR-interval and prints it
 {
-    PR := InputBox("Please enter the PR time (in milliseconds)","QT Time Input","w300 h150").value
-    QRS := InputBox("Please enter the QRS time (in milliseconds)","QT Time Input","w300 h150").value
-    QT := InputBox("Please enter the QT time (in milliseconds)","QT Time Input","w300 h150").value
-    HR := InputBox("Please enter the heart rate (in beats per minute) or RR-interval (in ms)","Heart Rate Input", "w300 h150").value
+    PR := ShowCustomBox("input", "PR Time", "Please enter the PR time (ms):", "", 400, 200)
+    QRS := ShowCustomBox("input", "QRS Time", "Please enter the QRS time (ms):", "", 400, 200)
+    QT := ShowCustomBox("input", "QT Time", "Please enter the QT time (ms):", "", 400, 200)
+    HR := ShowCustomBox("input", "Heart Rate", "Please enter the heart rate (bpm) or RR interval (ms):", "", 400, 200)
+
+    if (PR == "" || QRS == "" || QT == "" || HR == "") {
+        ShowCustomBox("message", "Error", "All inputs are required!", 400, 200)
+        return
+    }
 
     if (HR < 200) {
         RR := 60 / HR
         QTc := Round(QT / Sqrt(RR))
-        }
-
-    else {  
-        QTc := Round(QT / Sqrt((HR/1000)))    
-        }
-
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
-    Sleep 300
-    Send "c" 
+    } else {
+        QTc := Round(QT / Sqrt((HR / 1000)))
+    }
+    
+    Send "c"
     Sleep 300
     Send "PQ: " PR " ms, QRS: " QRS " ms, QTc: " QTc "ms{Enter}"
     Sleep 600
 }
 
-
-#1::            ; (Windows key + 1) print text when handmatige strook is added for atrial rhythm
+#1::        ; (Windows Key + 1) adds atrial rhythm
 {
-
-    freq := InputBox("Please enter the frequency (in bpm)","frequency atrial rhythm input","w300 h150").value
-    duration := InputBox("Please enter the duration (in seconds)","duration atrial rhythm input", "w300 h150").value
+    freq := ShowCustomBox("input", "Frequency", "Please enter the frequency (bpm):", "", 400, 200)
+    duration := ShowCustomBox("input", "Duration", "Please enter the duration (seconds):", "", 400, 200)
 
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
     Send "Atriaal ritme, freq " freq " spm, duur " duration " sec."
@@ -375,9 +391,8 @@ F4:: Send "PT noteert '{Space}"
 
 #Numpad1::      ; (Windows key + numpad 1) print text when handmatige strook is added for atrial rhythm
 {
-
-    freq := InputBox("Please enter the frequency (in bpm)","frequency atrial rhythm input","w300 h150").value
-    duration := InputBox("Please enter the duration (in seconds)","duration atrial rhythm input", "w300 h150").value
+    freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
+    duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
 
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
     Send "Atriaal ritme, freq " freq " spm, duur " duration " sec."
@@ -386,15 +401,14 @@ F4:: Send "PT noteert '{Space}"
 
 #2::            ; (Windows key + 2) print text when handmatige strook is added for ventricular rhythm
 {
-
-    morphology := InputBox("Please enter morphology; 1 is uniform, 2 is multiform", "morphology input", "w300 h150").value
-    freq := InputBox("Please enter the frequency (in bpm)","frequency ventriculair rhythm input","w300 h150").value
-    duration := InputBox("Please enter the duration (in seconds)","duration atrial rhythm input", "w300 h150").value
+    morphology := ShowCustomBox("input", "Morphology Input", "Please enter morphology (1 = uniform, 2 = multiform):", "", 400, 200)
+    freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
+    duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
 
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
 
-    if morphology == 1 {
-        Send  "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
+    if (morphology == "1") {
+        Send "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
         Send "{Enter}"
     } else {
         Send "Multiform ventriculair ritme, freq " freq " spm, duur " duration " sec."
@@ -404,15 +418,14 @@ F4:: Send "PT noteert '{Space}"
 
 #Numpad2::      ; (Windows key + numpad 2) print text when handmatige strook is added for ventricular rhythm
 {
-
-    morphology := InputBox("Please enter morphology; 1 is uniform, 2 is multiform", "morphology input", "w300 h150").value
-    freq := InputBox("Please enter the frequency (in bpm)","frequency ventriculair rhythm input","w300 h150").value
-    duration := InputBox("Please enter the duration (in seconds)","duration atrial rhythm input", "w300 h150").value
+    morphology := ShowCustomBox("input", "Morphology Input", "Please enter morphology (1 = uniform, 2 = multiform):", "", 400, 200)
+    freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
+    duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
 
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
 
-    if morphology == 1 {
-        Send  "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
+    if (morphology == "1") {
+        Send "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
         Send "{Enter}"
     } else {
         Send "Multiform ventriculair ritme, freq " freq " spm, duur " duration " sec."
@@ -420,47 +433,48 @@ F4:: Send "PT noteert '{Space}"
     }
 }
 
-#4::            ; (Windows key + 4) Prints tekst when only one complaint is present 
+#4::            ; (Windows key + 4) Prints tekst when only one complaint is present
 {
-    klacht := InputBox("Please enter the complaint","Klacht","w300 h150")
-    bevinding := InputBox("Please enter the finding","Bevinding","w300 h150")
+    klacht := ShowCustomBox("input", "Complaint Input", "Please enter the complaint:", "", 400, 200)
+    bevinding := ShowCustomBox("input", "Finding Input", "Please enter the finding:", "", 400, 200)
 
     Send "^a"
-    Send "Het dagboekje is wel aanwezig.`nEr is 1 keer een klacht aangegeven. De klacht en bevinding zijn:`n- " klacht.Value " waarbij " bevinding.Value " is aangetroffen. Zie bijgevoegde strook."
+    Send "Het dagboekje is wel aanwezig.`nEr is 1 keer een klacht aangegeven. De klacht en bevinding zijn:`n- " klacht " waarbij " bevinding " is aangetroffen. Zie bijgevoegde strook."
 }
 
-#Numpad4::      ; (Windows key + numpad 4) Prints tekst when only one complaint is present 
+#Numpad4::      ; (Windows key + numpad 4) Prints tekst when only one complaint is present
 {
-    klacht := InputBox("Please enter the complaint","Klacht","w300 h150")
-    bevinding := InputBox("Please enter the finding","Bevinding","w300 h150")
+    klacht := ShowCustomBox("input", "Complaint Input", "Please enter the complaint:", "", 400, 200)
+    bevinding := ShowCustomBox("input", "Finding Input", "Please enter the finding:", "", 400, 200)
 
     Send "^a"
-    Send "Het dagboekje is wel aanwezig.`nEr is 1 keer een klacht aangegeven. De klacht en bevinding zijn:`n- " klacht.Value " waarbij " bevinding.Value " is aangetroffen. Zie bijgevoegde strook."
+    Send "Het dagboekje is wel aanwezig.`nEr is 1 keer een klacht aangegeven. De klacht en bevinding zijn:`n- " klacht " waarbij " bevinding " is aangetroffen. Zie bijgevoegde strook."
 }
 
-#5::            ; (Windows key + 5) Prints tekst when only no complaint is present 
-{ 
-    Send "^a" 
+#5::            ; (Windows key + 5) Prints tekst when no complaint is present
+{
+    Send "^a"
     Send "Het dagboekje is wel aanwezig.`nEr is 0 keer een klacht aangegeven."
 }
 
-#Numpad5::      ; (Windows key + numpad 5) Prints tekst when only no complaint is present 
-{ 
-    Send "^a" 
+#Numpad5::      ; (Windows key + numpad 5) Prints tekst when no complaint is present
+{
+    Send "^a"
     Send "Het dagboekje is wel aanwezig.`nEr is 0 keer een klacht aangegeven."
 }
 
-#6::            ; (Windows key + 6) Prints tekst when no dairy is present
-{ 
-    Send "^a" 
+#6::            ; (Windows key + 6) Prints tekst when no diary is present
+{
+    Send "^a"
     Send "Het dagboekje is niet aanwezig."
 }
 
-#Numpad6::      ; (Windows key + numpad 6) Prints tekst when no dairy is present
-{ 
-    Send "^a" 
+#Numpad6::      ; (Windows key + numpad 6) Prints tekst when no diary is present
+{
+    Send "^a"
     Send "Het dagboekje is niet aanwezig."
 }
+
 
 
 #Hotif WinActive("Knipprogramma")
@@ -570,6 +584,188 @@ d::         ; press d for sinusbradycardie (bruin)
     Sleep 100
     Send "{Enter}"
 }
+
+Persistent
+
+; Function to get the coordinates of the Philips Cardiologs window
+GetActiveCardiologsMonitor() {
+    if WinActive("Philips Cardiologs - Google Chrome") || WinActive("Philips Cardiologs - Werklijst - Google Chrome") || WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge") {
+        ; Get the position and size of the active window
+        WinGetPos(&x, &y, &w, &h, "A")
+        return { X: x, Y: y, W: w, H: h }
+    }
+    return False
+}
+
+ShowCustomBox(type, title, content, default := "", width := 400, height := 200) {
+    monitor := GetActiveCardiologsMonitor()
+    if monitor {
+        ; Calculate position for centering on the Cardiologs window
+        x := monitor.X + monitor.W / 4
+        y := monitor.Y + monitor.H / 4
+
+        ; Create a new GUI
+        myGui := Gui("+AlwaysOnTop -Caption +Border")
+        myGui.Color := "White"  ; Set white background
+        myGui.SetFont("s12", "Trebuchet MS")  ; Set font to Trebuchet MS
+
+        ; Add a header
+        myGui.Add("Text", "x10 y10 w" (width - 20) " Center", title)
+
+        ; Add content or input box based on type
+        if (type = "message") {
+            ; Add a scrollable message display
+            myGui.Add("Edit", "x10 y+10 w" (width - 20) " h" (height - 100) " ReadOnly +Wrap +VScroll BackgroundWhite", content)
+        } else if (type = "input") {
+            ; Add prompt and input field
+            myGui.Add("Text", "x10 y+10 w" (width - 20), content)
+            edit := myGui.Add("Edit", "x10 y+10 w" (width - 20), default)
+        }
+
+        ; Add OK and Cancel buttons
+        buttonWidth := 80  ; Width of each button
+        buttonSpacing := 20  ; Space between buttons
+        totalButtonWidth := (2 * buttonWidth) + buttonSpacing
+        btnOkX := (width - totalButtonWidth) / 2  ; Center the buttons
+        btnCancelX := btnOkX + buttonWidth + buttonSpacing
+
+        btnOk := myGui.Add("Button", "w" buttonWidth " Default", "OK")
+        btnCancel := myGui.Add("Button", "w" buttonWidth, "Cancel")
+
+        ; Position buttons at the bottom of the GUI
+        btnOk.Move(btnOkX + 10, height - 50)  ; Adjust for padding
+        btnCancel.Move(btnCancelX + 10, height - 50)
+
+        ; Initialize flag and return value
+        guiValue := ""
+        guiActive := True
+
+        ; Event handlers
+        btnOk.OnEvent("Click", (*) => (
+            guiValue := (type = "input") ? edit.Value : "", guiActive := False, myGui.Destroy()
+        ))
+        btnCancel.OnEvent("Click", (*) => (guiValue := "", guiActive := False, myGui.Destroy()))
+
+        ; Show the GUI
+        myGui.Show("x" x " y" y " w" width " h" height)
+
+        ; Wait for user interaction
+        while guiActive {
+            Sleep 50
+        }
+
+        ; Return value based on type
+        return guiValue
+    } else {
+        MsgBox("Philips Cardiologs is not active!")
+        return False
+    }
+}
+
+
+
+
+/*
+
+ShowCustomMessageBox(title, message, width := 800, height := 600) {
+    monitor := GetActiveCardiologsMonitor()
+    if monitor {
+        ; Calculate position for centering on the Cardiologs window
+        x := monitor.X + monitor.W / 4
+        y := monitor.Y + monitor.H / 4
+
+        ; Create a new GUI for the message box
+        myGui := Gui("+AlwaysOnTop -Caption +Border")  ; Add black border
+        myGui.Color := "White"  ; Set the GUI background color to white
+
+        ; Set font globally to Trebuchet MS
+        myGui.SetFont("s12", "Trebuchet MS")
+
+        ; Add a header
+        myGui.Add("Text", "w" width " Center", title)
+
+        ; Add a scrollable Edit control for the main message
+        myGui.Add("Edit", "w" width " h" (height - 100) " ReadOnly +Wrap +VScroll BackgroundWhite", message)
+
+        ; Add the OK button
+        btnOk := myGui.Add("Button", "w80 Default", "OK")
+        btnOk.Move((width - 80) / 2, height - 40)
+
+        ; Event handler for OK button to close the GUI
+        btnOk.OnEvent("Click", (*) => myGui.Destroy())
+
+        ; Set GUI title and display
+        myGui.Title := title
+        myGui.Show("x" x " y" y " w" width " h" height)
+    } else {
+        MsgBox("Philips Cardiologs is not active!")
+    }
+}
+
+ShowCustomInputBox(title, prompt, default := "", width := 400, height := 200) {
+    monitor := GetActiveCardiologsMonitor()
+    if monitor {
+        ; Calculate position for centering on the Cardiologs window
+        x := monitor.X + monitor.W / 4
+        y := monitor.Y + monitor.H / 4
+
+        ; Create a new GUI for the input box
+        myGui := Gui("+AlwaysOnTop -Caption +Border")
+        myGui.Color := "White"  ; Set white background
+        myGui.SetFont("s12", "Trebuchet MS")  ; Set font to Trebuchet MS
+
+        ; Add a prompt
+        myGui.Add("Text", "w" width, prompt)
+
+        ; Add an Edit control for user input
+        edit := myGui.Add("Edit", "w" (width - 20), default)
+
+        ; Add OK and Cancel buttons
+        buttonWidth := 80  ; Explicitly define button width
+        buttonSpacing := 10
+        totalButtonWidth := 2 * buttonWidth + buttonSpacing
+        btnOkX := (width - totalButtonWidth) / 2
+        btnCancelX := btnOkX + buttonWidth + buttonSpacing
+
+        btnOk := myGui.Add("Button", "w" buttonWidth " Default", "OK")
+        btnCancel := myGui.Add("Button", "w" buttonWidth, "Cancel")
+
+        ; Position buttons at the bottom
+        btnOk.Move(btnOkX, height - 40)
+        btnCancel.Move(btnCancelX, height - 40)
+
+        ; Initialize flag and value
+        guiValue := ""
+        guiActive := True
+
+        ; Event handlers
+        btnOk.OnEvent("Click", (*) => (guiValue := edit.Value, guiActive := False, myGui.Destroy()))
+        btnCancel.OnEvent("Click", (*) => (guiValue := "", guiActive := False, myGui.Destroy()))
+
+        ; Show the GUI
+        myGui.Show("x" x " y" y " w" width " h" height)
+
+        ; Wait for user interaction
+        while guiActive {
+            Sleep 50
+        }
+
+        ; Return the user's input or empty string on cancel
+        return guiValue
+    } else {
+        MsgBox("Philips Cardiologs is not active!")
+        return False
+    }
+}
+
+*/
+
+
+
+
+
+
+
 
 
 /* something I am working on, not for production
