@@ -1,11 +1,11 @@
 # Autohotkey for Cardiologs
-Remaps, automation, and other things for Cardiologs
+Remaps, automation, and other things for Cardiologs and Snipping Tool (knipprogramma)
 
 This is a script that has some remaps and automation shortcuts for certain tasks within Cardiologs. Things to consider:
 - It works on Windows OS, not tested on Mac OS or Linux
 - It works on Google Chrome and Microsoft Edge, not tested on another browser
 - shortcuts based on a 105-keys keyboard, so the merge remap to the left backslash key (left of 'z' key) cannot be used on standard laptop keyboard layouts
-- It also works with 
+- The snippingtool program should sometimes be pressed multiple times in order for it to get the right color
 
 ## IMPORTANT
 It only applies the shortcuts when the Philips Cardiologs webpage is active. If this is active, press F1 to display the cheat sheet containing all the commands that can be used within Cardiologs.
