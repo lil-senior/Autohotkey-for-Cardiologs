@@ -154,7 +154,7 @@ F4:: Send "PT noteert '{Space}"
 
 ^q::            ; (CRTL + q) prints langste (en snelste) PAT/SVT when it consists of a beginning and end. 
 {
-    mode := InputBox("1 for langste PAT, 2 for langste en snelste PAT, 3 for langste SVT, 4 for langste en snelste SVT", "begin/eind", "w300 h150").value
+    mode := InputBox("1 for langste PAT, 2 for langste en snelste PAT, 3 for langste SVT, 4 for langste en snelste SVT, 5 for PAT, and 6 for SVT", "begin/eind", "w300 h150").value
     
     WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge")
     if (mode == 1) {
@@ -220,6 +220,38 @@ F4:: Send "PT noteert '{Space}"
         Sleep 500
         Send "{Enter}"
     } 
+
+    if (mode == 5) {
+        Send "c" 
+        Sleep 500
+        Send "Begin PAT" 
+        Sleep 300
+        Send "{Enter}"
+        Sleep 800
+        Send "{Right}"
+        Sleep 500
+        Send "c"
+        Sleep 500
+        Send "Eind PAT"
+        Sleep 500
+        Send "{Enter}"
+    } 
+
+    else if (mode == 6) {
+        Send "c"
+        Sleep 800
+        Send "Begin SVT" 
+        Sleep 300
+        Send "{Enter}"
+        Sleep 800
+        Send "{Right}"
+        Sleep 500
+        Send "c"
+        Sleep 500
+        Send "Eind SVT"
+        Sleep 500
+        Send "{Enter}"
+    }
     else {
         MsgBox "Try Again!"
     }
