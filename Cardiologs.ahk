@@ -27,6 +27,7 @@
 :*:pob::pijn op de borst        ; typing pob prints pijn op de borst
 :*:afib::boezemfibrilleren      ; typing afib prints boezemfibrilleren
 :*:hh::huishoudelijke werkzaamheden ; typing hh prints huishoudelijke werkzaamheden
+:*:ptm::patiëntmarker           ; typing ptm prints patiëntmarker
 :*:dok::druk op de borst        ; tyiping dok prints druk op de borst
 :*:uvb::uniforme ventriculaire bigeminie ; typing uvb prints uniforme ventriculaire bigeminie
 :*:uvt::uniforme ventriculaire trigeminie ; typing uvt prints uniforme ventriculaire trigeminie
@@ -70,6 +71,7 @@ Regarding the abbreviations:
 - Overig:
   - isan: prints is aangetroffen
   - hh: prints huishoudelijke werkzaamheden
+  - ptm: patiëntmarker
 
 Automations:
 - F2: Comments PR time or P:QRS ratio based on type of the AV-block.
