@@ -126,7 +126,6 @@ F2::        ; F2 comments the PR times for AV-blocks
         if (PR_after > PR_before) {
             ShowCustomBox("message", "Error", "PR after is longer than the PR before", "", 400, 200)
         } else {
-            WinActivate("Philips Cardiologs - Google Chrome") or WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge") or WinActivate("ahk_exe msedge.exe")
 
             Send "c"
             Sleep 400
@@ -135,15 +134,11 @@ F2::        ; F2 comments the PR times for AV-blocks
     } else if (type == "2") {
         PR := ShowCustomBox("input", "PR Time", "Enter PR time:", "", 400, 200)
 
-        WinActivate("Philips Cardiologs - Google Chrome") or WinActive("Cardiologs - Persoonlijk - Microsoft Edge") or WinActivate("ahk_exe msedge.exe")
-
         Send "c"
         Sleep 400
         Send "Mobitz II. PQ voor & na " PR "ms.{Enter}"
     } else if (type == "3") {
         ratio := ShowCustomBox("input", "P:QRS Ratio", "Enter the P:QRS ratio:", "", 400, 200)
-
-        WinActivate("Philips Cardiologs - Google Chrome") or WinActive("Cardiologs - Persoonlijk - Microsoft Edge") or WinActivate("ahk_exe msedge.exe")
 
         Send "c"
         Sleep 400
@@ -168,7 +163,6 @@ F4:: Send "PT noteert '{Space}"
 {
     mode := ShowCustomBox("input", "Select Mode", "1 for langste PAT, 2 for langste & snelste PAT, 3 for langste SVT, etc.", "", 400, 200)
 
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActivate("ahk_exe msedge.exe")
     if (mode == "1") {
         Send "c"
         Sleep 500
@@ -236,7 +230,6 @@ F4:: Send "PT noteert '{Space}"
     what := ShowCustomBox("input", "Langste of Snelste", "1 for langste, 2 for snelste, 3 for langste & snelste:", "", 400, 200)
     form := ShowCustomBox("input", "Morphologie", "1 for monomorf, 2 for polymorf:", "", 400, 200)
 
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActivate("ahk_exe msedge.exe")
     if (what == "1" and form == "1") {
         Send "c" 
         Sleep 500
@@ -340,7 +333,6 @@ F4:: Send "PT noteert '{Space}"
     freq := ShowCustomBox("input", "Frequency", "Please enter the frequency (bpm):", "", 400, 200)
     duration := ShowCustomBox("input", "Duration", "Please enter the duration (seconds):", "", 400, 200)
 
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActivate("ahk_exe msedge.exe")
     Send "Atriaal ritme, freq " freq " spm, duur " duration " sec."
     Send "{Enter}"
 }
@@ -350,7 +342,6 @@ F4:: Send "PT noteert '{Space}"
     freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
     duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
 
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActivate("ahk_exe msedge.exe")
     Send "Atriaal ritme, freq " freq " spm, duur " duration " sec."
     Send "{Enter}"
 }
@@ -360,8 +351,6 @@ F4:: Send "PT noteert '{Space}"
     morphology := ShowCustomBox("input", "Morphology Input", "Please enter morphology (1 = uniform, 2 = multiform):", "", 400, 200)
     freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
     duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
-
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActivate("ahk_exe msedge.exe")
 
     if (morphology == "1") {
         Send "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
@@ -377,8 +366,6 @@ F4:: Send "PT noteert '{Space}"
     morphology := ShowCustomBox("input", "Morphology Input", "Please enter morphology (1 = uniform, 2 = multiform):", "", 400, 200)
     freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
     duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
-
-    WinActive("Philips Cardiologs - Google Chrome") or WinActivate("Philips Cardiologs - Werklijst - Google Chrome") or WinActivate("ahk_exe msedge.exe")
 
     if (morphology == "1") {
         Send "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
