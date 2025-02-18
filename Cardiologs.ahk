@@ -79,6 +79,7 @@ Automations:
 - Alt + A: Automatically comments 'Aberrantie' and adds it to the report.
 - Alt + N: Prints the right (ns)VT.
 - Ctrl + Q: Adds langste (& snelste) PAT/SVT to the report when it has a beginning and end.
+- Crtl + E: If 'handmatig' is added with a beginning and end part, it replaces the 'begin' with 'end'
 - Win + 0 (also Numpad0): Calculates the QTc (using Bazett's formula) and prints all durations.
 - Win + 1 (also Numpad1): Prints text when handmatige strook is added for atrial rhythm.
 - Win + 2 (also Numpad2): Prints text when handmatige strook is added for ventricular rhythm.
@@ -224,6 +225,34 @@ F4:: Send "PT noteert '{Space}"
     }
 } 
 
+^e::        ; If 'handmatig' is added with a beginning and end part, it replaces the 'begin' with 'end'
+{
+    Send "^a"
+    Send "^c"
+    Sleep 300
+    Send "{Enter}"
+    Sleep 500
+    Send "{Right}"
+    Sleep 500
+    Send "{Right}"
+    Sleep 500
+    loop 7
+    { 
+        Send "+{Tab}"
+        Sleep 50
+    }
+    Send "{Enter}"
+    Sleep 500
+    loop 2
+    { 
+        Send "{Tab}"
+        Sleep 50
+    }
+    Send "^v"
+    Send "{Home}"
+    Send "^+{Right}"
+    Send "Eind "
+}
 
 !n::            ; (alt + n) prints the right (ns)VT
 {
