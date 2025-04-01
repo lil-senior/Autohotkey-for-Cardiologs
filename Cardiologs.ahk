@@ -360,16 +360,29 @@ F4:: Send "PT noteert '{Space}"
 #1::        ; (Windows Key + 1) adds atrial rhythm
 {
     freq := ShowCustomBox("input", "Frequency", "Please enter the frequency (bpm):", "", 400, 200)
+    if (freq = "" || freq = false)
+    return
+
     duration := ShowCustomBox("input", "Duration", "Please enter the duration (seconds):", "", 400, 200)
+    if (duration = "" || duration = false)
+    return
 
     Send "Atriaal ritme, freq " freq " spm, duur " duration " sec."
     Send "{Enter}"
+
+    
 }
 
 #Numpad1::      ; (Windows key + numpad 1) print text when handmatige strook is added for atrial rhythm
 {
-    freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
-    duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
+    freq := ShowCustomBox("input", "Frequency", "Please enter the frequency (bpm):", "", 400, 200)
+    if (freq = "" || freq = false)
+    return
+
+    duration := ShowCustomBox("input", "Duration", "Please enter the duration (seconds):", "", 400, 200)
+    if (duration = "" || duration = false)
+    return
+
 
     Send "Atriaal ritme, freq " freq " spm, duur " duration " sec."
     Send "{Enter}"
@@ -380,6 +393,9 @@ F4:: Send "PT noteert '{Space}"
     morphology := ShowCustomBox("input", "Morphology Input", "Please enter morphology (1 = uniform, 2 = multiform):", "", 400, 200)
     freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
     duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
+
+    if (morphology == "" || morphology = false)
+    return
 
     if (morphology == "1") {
         Send "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
@@ -395,6 +411,9 @@ F4:: Send "PT noteert '{Space}"
     morphology := ShowCustomBox("input", "Morphology Input", "Please enter morphology (1 = uniform, 2 = multiform):", "", 400, 200)
     freq := ShowCustomBox("input", "Frequency Input", "Please enter the frequency (in bpm):", "", 400, 200)
     duration := ShowCustomBox("input", "Duration Input", "Please enter the duration (in seconds):", "", 400, 200)
+
+    if (morphology == "" || morphology = false)
+    return
 
     if (morphology == "1") {
         Send "Uniform ventriculair ritme, freq " freq " spm, duur " duration " sec."
