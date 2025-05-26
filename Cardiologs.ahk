@@ -54,7 +54,7 @@ Regarding the abbreviations:
 - Andere klachten:
   - lch: prints lichthoofdigheid
   - krt: prints kortademigheid
-  - hkl: prints hartkloppingen
+  - hkl: prints hartklopping
   - ovs: prints overslag
   - dzl: prints duizeligheid
 - Ritmes:
