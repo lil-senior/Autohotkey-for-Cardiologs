@@ -13,7 +13,7 @@
 ; abbreviations
 
 :*:bnd::benauwdheid             ; typing bnd prints benauwdheid
-:*:hkl::hartkloppingen          ; typing hkl prints hartklopping
+:*:hkl::hartklopping            ; typing hkl prints hartklopping
 :*:ovs::overslagen              ; typing ovs prints overslag
 :*:snt::sinustachycardie        ; typing snt prints sinustachycardie
 :*:snr::sinusritme              ; typing snr prints sinustachycardie
