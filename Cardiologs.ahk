@@ -35,7 +35,7 @@
 :*:mvt::multiforme ventriculaire trigeminie ; typing mvt prints multiforme ventriculaire trigeminie
 
 
-#Hotif WinActive("Philips Cardiologs - Google Chrome") or WinActivate("ahk_exe msedge.exe")
+#Hotif WinActive("Philips Cardiologs") && (WinActive("ahk_exe chrome.exe") || WinActive("ahk_exe msedge.exe"))
 
 ; F1 prints the whole list of combinations
 
