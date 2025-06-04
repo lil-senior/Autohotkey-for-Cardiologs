@@ -580,7 +580,7 @@ Persistent
 
 ; Function to get the coordinates of the Philips Cardiologs window
 GetActiveCardiologsMonitor() {
-    if WinActive("Philips Cardiologs - Google Chrome") || WinActive("Philips Cardiologs - Werklijst - Google Chrome") || WinActive("Philips Cardiologs - Persoonlijk - Microsoft Edge") {
+    if WinActive("Philips Cardiologs") && (WinActive("ahk_exe chrome.exe") || WinActive("ahk_exe msedge.exe")) {
         ; Get the position and size of the active window
         WinGetPos(&x, &y, &w, &h, "A")
         return { X: x, Y: y, W: w, H: h }
